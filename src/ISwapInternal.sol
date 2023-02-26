@@ -15,6 +15,7 @@ interface ISwapInternal {
         IERC721[] nfts;
         uint256[] ids;
         address to;
+        uint256 exchangeId;
     }
 
     struct Exchange {
@@ -24,5 +25,6 @@ interface ISwapInternal {
         bytes32 sigPartyTwo;
         SwapType swapType;
         uint256 deadline;
+        uint256 id;
     }
 }
