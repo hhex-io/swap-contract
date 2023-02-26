@@ -5,12 +5,15 @@ import "forge-std/Test.sol";
 
 import {Swap} from "../../src/Swap.sol";
 
-contract TokenTest is Test {
+import {Fixtures_Swap} from "../Fixtures_Swap.sol";
+
+contract TokenTest is Fixtures_Swap {
     Swap public swap;
-    uint256 public constant FEE = 3.4 ether;
 
     function setUp() public {
         swap = new Swap(FEE);
+
+        _createWallets();
     }
 
     /*//////////////////////////////////////////////////////////////
