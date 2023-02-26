@@ -4,6 +4,7 @@ pragma solidity ^0.8.13;
 import "forge-std/Test.sol";
 
 import {IERC721} from "openzeppelin-contracts/token/ERC721/IERC721.sol";
+import {Strings} from "openzeppelin-contracts/utils/Strings.sol";
 
 import {ISwapInternal} from "../../src/ISwapInternal.sol";
 import {ISwap} from "../../src/ISwap.sol";
@@ -37,6 +38,11 @@ contract Fixtures_Swap is Test {
     // default signatures
     bytes32 public sigAlice;
     bytes32 public sigBob;
+    // default `Exchange` data
+    ISwapInternal.SwapType public defaultSwapType =
+        ISwapInternal.SwapType.ONE_TO_ONE;
+    uint256 public defaultDeadline = block.timestamp + 1 days;
+    uint256 public defaultId = 1;
     bytes public defaultEncodedExchange;
 
     function _createWallets() internal {
@@ -45,10 +51,23 @@ contract Fixtures_Swap is Test {
     }
 
     function _createOneNFTWIthOneIdPerWallet() internal {
+        MockNFT nft;
         for (uint256 i; i < 1; ++i) {
-            aliceNfts.push(IERC721(new MockNFT("AliceTest", "A_TST")));
+            // Alice
+            nft = new MockNFT(
+                string.concat(Strings.toString(i), "_AliceTest"),
+                string.concat(Strings.toString(i), "_A_TST")
+            );
+            nft.mint(ALICE, i);
+            aliceNfts.push(IERC721(nft));
             aliceIds.push(i);
-            bobNfts.push(IERC721(new MockNFT("BobTest", "B_TST")));
+            // Bob
+            nft = new MockNFT(
+                string.concat(Strings.toString(i), "_BobTest"),
+                string.concat(Strings.toString(i), "_B_TST")
+            );
+            nft.mint(BOB, i);
+            bobNfts.push(IERC721(nft));
             bobIds.push(i);
         }
     }
@@ -76,9 +95,9 @@ contract Fixtures_Swap is Test {
                 bobEncodedData,
                 sigAlice,
                 sigBob,
-                ISwapInternal.SwapType.MANY_TO_MANY,
-                block.timestamp + 1 days,
-                1
+                defaultSwapType,
+                defaultDeadline,
+                defaultId
             )
         );
     }

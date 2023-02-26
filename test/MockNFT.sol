@@ -8,4 +8,8 @@ contract MockNFT is ERC721 {
         string memory name_,
         string memory symbol_
     ) ERC721(name_, symbol_) {}
+
+    function mint(address to, uint256 tokenId) public {
+        _mint(to, tokenId);
+    }
 }
