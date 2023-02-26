@@ -6,6 +6,7 @@ import "forge-std/Test.sol";
 import {IERC721} from "openzeppelin-contracts/token/ERC721/IERC721.sol";
 
 import {ISwapInternal} from "../../src/ISwapInternal.sol";
+import {ISwap} from "../../src/ISwap.sol";
 
 import {MockNFT} from "./MockNFT.sol";
 
@@ -59,6 +60,26 @@ contract Fixtures_Swap is Test {
         );
         bobEncodedData = abi.encode(
             ISwapInternal.Data(bobNfts, bobIds, ALICE, 1)
+        );
+    }
+
+    /// @dev Creates default signatures from default encoded data
+    function _createDefaultSigFromData(ISwap swap) internal {
+        sigAlice = swap.signEncodedExchangeData(aliceEncodedData);
+        sigBob = swap.signEncodedExchangeData(bobEncodedData);
+    }
+
+    function _createDefaultExchange() internal {
+        defaultEncodedExchange = abi.encode(
+            ISwapInternal.Exchange(
+                aliceEncodedData,
+                bobEncodedData,
+                sigAlice,
+                sigBob,
+                ISwapInternal.SwapType.MANY_TO_MANY,
+                block.timestamp + 1 days,
+                1
+            )
         );
     }
 }
