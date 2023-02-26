@@ -1,0 +1,36 @@
+<h1 align="center"> Hand to Hand Exchange: Swap </h1>
+Exchange `x NFT(s)` for `y NFT(s)` without payment (except for gas & platform fees).
+
+## Use Case
+
+Alice wants to exchange her NFT(s) for Bob's. 1 NFT can be exchanged for 1 or multiple NFTs.
+
+### Process
+
+Alice signs a tx to exchange her x NFT(s) for Bob's y NFT(s) and gives approval to `Swap` contract to process the exchange. Bob verifies the NFTs in the dApp interface. If approved, he signs an approval for the echange, grants the rights to `Swap` to process the swap and publishes the whole tx on-chain. The NFTs are exchanged.
+
+Note:
+
+-   A platform fee is taken on both sides and encoded in the signature
+-   Publishing and decoding the signature on-chain can fail if:
+    -   One party no longer owns the NFT(s)
+    -   One party lacks funds for the platform or gas fees
+    -   The signature timestamp is too old
+    -   One party has not signed
+
+## Implementation
+
+-   Frontend dApp checks before signature:
+    -   NFT ownership
+    -   Funds for the platform and gas fees
+-   First signature is saved in the backend
+-   Second signature pushes both signatures on-chain
+-   Swap contract:
+    -   Decodes both signatures
+    -   Processes the NFT exchange
+    -   Take platform fee
+
+## Later
+
+-   Both parties can issue the transaction
+-   ERC20 payment can be introduced during the exchange
