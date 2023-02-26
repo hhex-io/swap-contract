@@ -3,19 +3,20 @@ pragma solidity ^0.8.13;
 
 import "forge-std/Test.sol";
 
-import "../../src/Swap.sol";
+import {Swap} from "../../src/Swap.sol";
 
 contract TokenTest is Test {
-    Swap public t;
+    Swap public swap;
+    uint256 public constant FEE = 3.4 ether;
 
     function setUp() public {
-        t = new Swap();
+        swap = new Swap(FEE);
     }
 
     /*//////////////////////////////////////////////////////////////
-                                 BASIC ATTRIBUTES
+                                 ATTRIBUTES
     //////////////////////////////////////////////////////////////*/
-    function test_truthy() public {
-        assertTrue(true);
+    function test_fee_InUSD() public {
+        assertEq(swap.feeInUSD(), FEE);
     }
 }
