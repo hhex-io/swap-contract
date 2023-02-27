@@ -9,6 +9,8 @@ contract SwapInternal is ISwapInternal {
         Data memory one,
         Data memory two
     ) internal view returns (bool) {
+        require(block.timestamp <= exchange.deadline, "DEADLINE_REACHED");
+
         return true;
     }
 }

@@ -22,4 +22,12 @@ contract Swap is ISwapInternal, ISwap, EIP712 {
     ) external view override returns (bytes32 signature) {
         signature = _hashTypedDataV4(keccak256(data));
     }
+
+    function swap(bytes memory encodedExchange) external {
+        Exchange memory exchange = abi.decode(encodedExchange, (Exchange));
+        Data memory one = abi.decode(exchange.encodedDataPartyOne, (Data));
+        Data memory two = abi.decode(exchange.encodedDataPartyTwo, (Data));
+
+        require(_isValidSwap(exchange, one, two));
+    }
 }
