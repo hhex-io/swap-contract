@@ -27,4 +27,6 @@ interface ISwapInternal {
         uint256 deadline;
         uint256 id;
     }
+
+    error SwapInternal__InvalidExchangeId(string party);
 }
