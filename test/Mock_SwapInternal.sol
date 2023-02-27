@@ -10,6 +10,15 @@ import {Swap} from "../src/Swap.sol";
 contract Mock_SwapInternal is Swap {
     constructor(uint256 fee_) Swap(fee_) {}
 
+    function exposed_isValidExchangeId(
+        uint256 baseExchangeId,
+        uint256 oneExchangeId,
+        uint256 twoExchangeId
+    ) external view returns (bool) {
+        return
+            _isValidExchangeId(baseExchangeId, oneExchangeId, twoExchangeId);
+    }
+
     function exposed_isValidSwap(
         bytes memory encodedExchange
     ) public view returns (bool) {
