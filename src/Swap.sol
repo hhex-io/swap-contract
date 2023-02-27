@@ -3,10 +3,11 @@ pragma solidity ^0.8.13;
 
 import {EIP712} from "openzeppelin-contracts/utils/cryptography/EIP712.sol";
 
-import {ISwapInternal} from "./ISwapInternal.sol";
 import {ISwap} from "./ISwap.sol";
 
-contract Swap is ISwapInternal, ISwap, EIP712 {
+import {SwapInternal} from "./SwapInternal.sol";
+
+contract Swap is ISwap, SwapInternal, EIP712 {
     uint256 public feeInUSD;
 
     constructor(uint256 fee_) EIP712("Hand 2 Hand Exchange", "1") {
