@@ -24,6 +24,19 @@ contract SwapInternalTest_isValidSwap is Fixtures_Swap {
         _createDefaultExchange();
     }
 
+    /*//////////////////////////////////////////////////////////////
+                            REVERT TESTS
+    //////////////////////////////////////////////////////////////*/
+    function testRevert_isValidSwap_VerifyDeadline() public {
+        skip(defaultDeadline + 1);
+
+        vm.expectRevert("DEADLINE_REACHED");
+        swap.exposed_isValidSwap(defaultEncodedExchange);
+    }
+
+    /*//////////////////////////////////////////////////////////////
+                            SUCCESS TESTS
+    //////////////////////////////////////////////////////////////*/
     function test_isValidSwap_VerifyWholeEncodedExchangeData() public {
         assertTrue(swap.exposed_isValidSwap(defaultEncodedExchange));
     }
