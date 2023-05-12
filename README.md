@@ -31,6 +31,8 @@ Note:
 
 ## Later
 
+-   Use `Permit2` instead `IERC712.approve(...)`
+-   Add platform fee
 -   Exchange one to many, many to many...
 -   Both parties can issue the transaction
 -   ERC20 payment can be introduced during the exchange
