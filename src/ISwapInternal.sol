@@ -12,18 +12,16 @@ interface ISwapInternal {
     }
 
     struct Data {
-        IERC721[] nfts;
-        uint256[] ids;
+        IERC721 nft;
+        uint256 nftId;
         address to;
-        uint256 exchangeId;
     }
 
     struct Exchange {
-        bytes encodedDataPartyOne;
-        bytes encodedDataPartyTwo;
-        bytes32 sigPartyOne;
-        bytes32 sigPartyTwo;
-        SwapType swapType;
+        // encoded Data for party one - tx initiator
+        bytes partyOne;
+        // encoded Data for party two - tx validator
+        bytes partyTwo;
         uint256 deadline;
         uint256 id;
     }
