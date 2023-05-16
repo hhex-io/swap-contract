@@ -7,8 +7,10 @@ solc_version = "0.8.13"
 gas_reports = ["*"]
 optimizer = true
 optimizer_runs = 20_000
+via_ir = true
 
 [profile.ci]
 verbosity = 4
+via_ir = true
 
 # See more config options https://github.com/foundry-rs/foundry/tree/master/config
