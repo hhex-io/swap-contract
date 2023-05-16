@@ -44,5 +44,22 @@ module.exports = { signExchange };
     name: 'Hand 2 Hand Exchange',
     version: '1',
     chainId: ethers.BigNumber.from('97'),
-    verifyingContract: '0x690B9A9E9aa1C9dB991C7721a92d351Db4FaC990',
+    verifyingContract: '0x690B9A9E9aa1C9dB991C7721a92d351Db4FaC990', // swap contract
 }; */
+
+////////// Exchange example //////////
+/*
+const exchange = {
+    partyOne: {
+        nft: '0x326374475908FC640C3DDE59981C721CafF9c828', // WincityPGC
+        nftId: 1,
+        to: '0x1f9090aaE28b8a3dCeaDf281B0F12828e676c326',
+    },
+    partyTwo: {
+        nft: '0x326374475908FC640C3DDE59981C721CafF9c828',  // WincityPGC
+        nftId: 20,
+        to: '0xE94f1fa4F27D9d288FFeA234bB62E1fBC086CA0c',
+    },
+    deadline: 1627776000,
+}
+*/
