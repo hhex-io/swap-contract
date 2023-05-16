@@ -24,22 +24,26 @@ contract Swap is ISwap, SwapInternal, EIP712 {
         bytes calldata sigPartyOne,
         bytes calldata sigPartyTwo
     ) external {
-        Data memory one = abi.decode(exchange.partyOne, (Data));
-        Data memory two = abi.decode(exchange.partyTwo, (Data));
+        Data memory one = exchange.partyOne;
+        Data memory two = exchange.partyTwo;
+        // the one setting up `Exchange` data
+        address initiator = two.to;
+        // the one validating `Exchange` data and paying gas fee to make the swap
+        address validator = one.to;
 
         bytes32 digest = _hashTypedDataV4(_hashSwap(exchange));
         require(
-            ECDSA.recover(digest, sigPartyOne) == two.to,
+            ECDSA.recover(digest, sigPartyOne) == initiator,
             "Tx Initiator Recovery Failed"
         );
         require(
-            ECDSA.recover(digest, sigPartyTwo) == one.to,
+            ECDSA.recover(digest, sigPartyTwo) == validator,
             "TX Validator Recovery Failed"
         );
         require(block.timestamp <= exchange.deadline, "DEADLINE_REACHED");
-        require(msg.sender == one.to, "NOT_TX_VALIDATOR");
+        require(msg.sender == validator, "NOT_TX_VALIDATOR");
 
-        one.nft.safeTransferFrom(two.to, one.to, one.nftId);
-        two.nft.safeTransferFrom(one.to, two.to, two.nftId);
+        one.nft.safeTransferFrom(initiator, validator, one.nftId);
+        two.nft.safeTransferFrom(validator, initiator, two.nftId);
     }
 }

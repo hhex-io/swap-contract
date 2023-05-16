@@ -18,10 +18,10 @@ interface ISwapInternal {
     }
 
     struct Exchange {
-        // encoded Data for party one - tx initiator
-        bytes partyOne;
-        // encoded Data for party two - tx validator
-        bytes partyTwo;
+        // Data for party one - tx initiator
+        Data partyOne;
+        // Data for party two - tx validator
+        Data partyTwo;
         uint256 deadline;
         uint256 id;
     }
