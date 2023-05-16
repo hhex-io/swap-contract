@@ -18,12 +18,11 @@ contract SwapTest_fixtures is Fixtures_Swap {
         swap = new Swap(FEE);
 
         _createWallets();
+        _createOneNFTWIthOneIdPerWallet();
+        _createDefaultEncodedSwap();
     }
 
     function testFixtures_createDefaulEncodedData() public {
-        _createOneNFTWIthOneIdPerWallet();
-        _createDefaulEncodedData();
-
         // Alice
         assertEq(ERC721(address(aliceNfts[0])).name(), "0_AliceTest");
         assertEq(ERC721(address(aliceNfts[0])).symbol(), "0_A_TST");
@@ -34,5 +33,20 @@ contract SwapTest_fixtures is Fixtures_Swap {
         assertEq(ERC721(address(bobNfts[0])).symbol(), "0_B_TST");
         assertEq(ERC721(address(bobNfts[0])).ownerOf(0), BOB);
         assertEq(bobIds[0], 0);
+
+        // Alice Data
+        assertEq(
+            address(defaultExchange.partyOne.nft),
+            address(aliceData.nft)
+        );
+        assertEq(defaultExchange.partyOne.nftId, aliceData.nftId);
+        assertEq(defaultExchange.partyOne.to, BOB);
+        // Bob Data
+        assertEq(address(defaultExchange.partyTwo.nft), address(bobData.nft));
+        assertEq(defaultExchange.partyTwo.nftId, bobData.nftId);
+        assertEq(defaultExchange.partyTwo.to, ALICE);
+        // Other Exchange data
+        assertEq(defaultExchange.deadline, defaultDeadline);
+        assertEq(defaultExchange.id, defaultExchangeId);
     }
 }

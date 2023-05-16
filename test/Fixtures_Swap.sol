@@ -6,12 +6,12 @@ import "forge-std/Test.sol";
 import {IERC721} from "openzeppelin-contracts/token/ERC721/IERC721.sol";
 import {Strings} from "openzeppelin-contracts/utils/Strings.sol";
 
-import {ISwapInternal} from "../../src/ISwapInternal.sol";
-import {ISwap} from "../../src/ISwap.sol";
+import {ISwapInternal} from "../src/ISwapInternal.sol";
+import {ISwap} from "../src/ISwap.sol";
 
 import {MockNFT} from "./MockNFT.sol";
 
-contract Fixtures_Swap is Test {
+contract Fixtures_Swap is Test, ISwapInternal {
     /*//////////////////////////////////////////////////////////////
                             SWAP ATTRIBUTES
     //////////////////////////////////////////////////////////////*/
@@ -32,18 +32,18 @@ contract Fixtures_Swap is Test {
     uint256[] public aliceIds;
     IERC721[] public bobNfts;
     uint256[] public bobIds;
-    // default encoded data
-    bytes public aliceEncodedData;
-    bytes public bobEncodedData;
+    // default encoded `Data`
+    Data public aliceData;
+    Data public bobData;
     // default signatures
-    bytes32 public sigAlice;
-    bytes32 public sigBob;
+    bytes public sigAlice;
+    bytes public sigBob;
     // default `Exchange` data
-    ISwapInternal.SwapType public defaultSwapType =
-        ISwapInternal.SwapType.ONE_TO_ONE;
+    SwapType public defaultSwapType = SwapType.ONE_TO_ONE;
     uint256 public defaultDeadline = block.timestamp + 1 days;
-    uint256 public defaultId = 1;
+    uint256 public defaultExchangeId = 1;
     bytes public defaultEncodedExchange;
+    Exchange public defaultExchange;
 
     function _createWallets() internal {
         (ALICE, ALICE_PK) = makeAddrAndKey("Alice_PK");
@@ -72,33 +72,16 @@ contract Fixtures_Swap is Test {
         }
     }
 
-    /// @dev Creates default encoded data from default nfts and ids
-    function _createDefaulEncodedData() internal {
-        aliceEncodedData = abi.encode(
-            ISwapInternal.Data(aliceNfts, aliceIds, BOB, 1)
+    /// @dev Creates default encoded `Ecxhange` fro; `Data` with default nfts and ids
+    function _createDefaultEncodedSwap() internal {
+        aliceData = Data(aliceNfts[0], aliceIds[0], BOB);
+        bobData = Data(bobNfts[0], bobIds[0], ALICE);
+        defaultExchange = Exchange(
+            aliceData,
+            bobData,
+            defaultDeadline,
+            defaultExchangeId
         );
-        bobEncodedData = abi.encode(
-            ISwapInternal.Data(bobNfts, bobIds, ALICE, 1)
-        );
-    }
-
-    /// @dev Creates default signatures from default encoded data
-    function _createDefaultSigFromData(ISwap swap) internal {
-        sigAlice = swap.signEncodedExchangeData(aliceEncodedData);
-        sigBob = swap.signEncodedExchangeData(bobEncodedData);
-    }
-
-    function _createDefaultExchange() internal {
-        defaultEncodedExchange = abi.encode(
-            ISwapInternal.Exchange(
-                aliceEncodedData,
-                bobEncodedData,
-                sigAlice,
-                sigBob,
-                defaultSwapType,
-                defaultDeadline,
-                defaultId
-            )
-        );
+        defaultEncodedExchange = abi.encode(defaultExchange);
     }
 }
