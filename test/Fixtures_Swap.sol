@@ -33,8 +33,8 @@ contract Fixtures_Swap is Test, ISwapInternal {
     IERC721[] public bobNfts;
     uint256[] public bobIds;
     // default encoded `Data`
-    bytes public aliceEncodedData;
-    bytes public bobEncodedData;
+    Data public aliceData;
+    Data public bobData;
     // default signatures
     bytes public sigAlice;
     bytes public sigBob;
@@ -74,11 +74,11 @@ contract Fixtures_Swap is Test, ISwapInternal {
 
     /// @dev Creates default encoded `Ecxhange` fro; `Data` with default nfts and ids
     function _createDefaultEncodedSwap() internal {
-        aliceEncodedData = abi.encode(Data(aliceNfts[0], aliceIds[0], BOB));
-        bobEncodedData = abi.encode(Data(bobNfts[0], bobIds[0], ALICE));
+        aliceData = Data(aliceNfts[0], aliceIds[0], BOB);
+        bobData = Data(bobNfts[0], bobIds[0], ALICE);
         defaultExchange = Exchange(
-            aliceEncodedData,
-            bobEncodedData,
+            aliceData,
+            bobData,
             defaultDeadline,
             defaultExchangeId
         );

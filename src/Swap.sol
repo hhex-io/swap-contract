@@ -24,8 +24,8 @@ contract Swap is ISwap, SwapInternal, EIP712 {
         bytes calldata sigPartyOne,
         bytes calldata sigPartyTwo
     ) external {
-        Data memory one = abi.decode(exchange.partyOne, (Data));
-        Data memory two = abi.decode(exchange.partyTwo, (Data));
+        Data memory one = exchange.partyOne;
+        Data memory two = exchange.partyTwo;
 
         bytes32 digest = _hashTypedDataV4(_hashSwap(exchange));
         require(

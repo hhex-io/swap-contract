@@ -34,8 +34,18 @@ contract SwapTest_fixtures is Fixtures_Swap {
         assertEq(ERC721(address(bobNfts[0])).ownerOf(0), BOB);
         assertEq(bobIds[0], 0);
 
-        assertEq(defaultExchange.partyOne, aliceEncodedData);
-        assertEq(defaultExchange.partyTwo, bobEncodedData);
+        // Alice Data
+        assertEq(
+            address(defaultExchange.partyOne.nft),
+            address(aliceData.nft)
+        );
+        assertEq(defaultExchange.partyOne.nftId, aliceData.nftId);
+        assertEq(defaultExchange.partyOne.to, BOB);
+        // Bob Data
+        assertEq(address(defaultExchange.partyTwo.nft), address(bobData.nft));
+        assertEq(defaultExchange.partyTwo.nftId, bobData.nftId);
+        assertEq(defaultExchange.partyTwo.to, ALICE);
+        // Other Exchange data
         assertEq(defaultExchange.deadline, defaultDeadline);
         assertEq(defaultExchange.id, defaultExchangeId);
     }
