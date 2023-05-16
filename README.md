@@ -19,6 +19,8 @@ Note:
 
 ## Implementation
 
+### Flow Explanation
+
 -   Frontend dApp checks before signature:
     -   NFT ownership
     -   Funds for the platform and gas fees
@@ -28,6 +30,10 @@ Note:
     -   Decodes both signatures
     -   Processes the NFT exchange
     -   Take platform fee
+
+### Technical Details
+
+To sign an exchange, see `scripts/signExchange.js` - DATA MUST BE EXACTLY THE SAME FOR BOTH PARTIES
 
 ## Later
 
