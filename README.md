@@ -19,6 +19,8 @@ Note:
 
 ## Implementation
 
+### Flow Explanation
+
 -   Frontend dApp checks before signature:
     -   NFT ownership
     -   Funds for the platform and gas fees
@@ -28,6 +30,10 @@ Note:
     -   Decodes both signatures
     -   Processes the NFT exchange
     -   Take platform fee
+
+### Technical Details
+
+To sign an exchange, see `scripts/signExchange.js` - DATA MUST BE EXACTLY THE SAME FOR BOTH PARTIES
 
 ## Later
 
@@ -42,3 +48,5 @@ Note:
 
 -   v0.1.0 - bsc testnet: [0x8d67dF98c25e202066230cDBaC17D199eEeF53F6](https://testnet.bscscan.com/address/0x8d67df98c25e202066230cdbac17d199eeef53f6)
     -   users must approve swap contract with either `approve(address(swap), id)` or `setApprovalForAll(address(swap), true)`
+-   v0.1.1 - bsc testnet: [0xE2A0488B723B2B108485B624598351eC38c9fE67](https://testnet.bscscan.com/address/0xe2a0488b723b2b108485b624598351ec38c9fe67)
+    -   pass `Data` structure in clear, instead of encoding it, in `Exchange` structure
