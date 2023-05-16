@@ -37,3 +37,8 @@ Note:
 -   Both parties can issue the transaction
 -   ERC20 payment can be introduced during the exchange
 -   Platform fee is taken on both sides (encoded in the signature)
+
+## Deployed Contracts
+
+-   v0.1.0 - bsc testnet: [0x8d67dF98c25e202066230cDBaC17D199eEeF53F6](https://testnet.bscscan.com/address/0x8d67df98c25e202066230cdbac17d199eeef53f6)
+    -   users must approve swap contract with either `approve(address(swap), id)` or `setApprovalForAll(address(swap), true)`
