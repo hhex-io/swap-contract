@@ -48,5 +48,7 @@ To sign an exchange, see `scripts/signExchange.js` - DATA MUST BE EXACTLY THE SA
 
 -   v0.1.0 - bsc testnet: [0x8d67dF98c25e202066230cDBaC17D199eEeF53F6](https://testnet.bscscan.com/address/0x8d67df98c25e202066230cdbac17d199eeef53f6)
     -   users must approve swap contract with either `approve(address(swap), id)` or `setApprovalForAll(address(swap), true)`
--   v0.1.1 - bsc testnet: [0xE2A0488B723B2B108485B624598351eC38c9fE67](https://testnet.bscscan.com/address/0xe2a0488b723b2b108485b624598351ec38c9fe67)
-    -   pass `Data` structure in clear, instead of encoding it, in `Exchange` structure
+-   v0.1.1 - pass `Data` structure in clear, instead of encoding it, in `Exchange` structure
+    -   bsc testnet: [0xE2A0488B723B2B108485B624598351eC38c9fE67](https://testnet.bscscan.com/address/0xe2a0488b723b2b108485b624598351ec38c9fe67)
+    -   mumbai testnet: [0x5c47DfBe45Dd95a161F620964926D1D728efb974](https://mumbai.polygonscan.com/address/0x5c47dfbe45dd95a161f620964926d1d728efb974)
+    -   goerli testnet: [0xC7BFe799195117efde14FABa3b456Ea97585F882](https://goerli.etherscan.io/address/0xc7bfe799195117efde14faba3b456ea97585f882)
