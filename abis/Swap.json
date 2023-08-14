@@ -89,14 +89,48 @@
         {
           "components": [
             {
-              "internalType": "bytes",
+              "components": [
+                {
+                  "internalType": "contract IERC721",
+                  "name": "nft",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "nftId",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "address",
+                  "name": "to",
+                  "type": "address"
+                }
+              ],
+              "internalType": "struct ISwapInternal.Data",
               "name": "partyOne",
-              "type": "bytes"
+              "type": "tuple"
             },
             {
-              "internalType": "bytes",
+              "components": [
+                {
+                  "internalType": "contract IERC721",
+                  "name": "nft",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "nftId",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "address",
+                  "name": "to",
+                  "type": "address"
+                }
+              ],
+              "internalType": "struct ISwapInternal.Data",
               "name": "partyTwo",
-              "type": "bytes"
+              "type": "tuple"
             },
             {
               "internalType": "uint256",
